@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PZ Backyard Ultra 2027 — 48 Horas / Last Man Standing</title>
-    <meta name="description" content="PZ Backyard Ultra 2027. Tercera edición. 48 horas. 200 millas. 29-31 Enero 2027. Last Man Standing en Pérez Zeledón, Costa Rica.">
+    <title>PZ Backyard Ultra 2027 / 48 Horas / Last Man Standing</title>
+    <meta name="description" content="PZ Backyard Ultra 2027. Tercera edición. 48 horas. 200 millas. 29 al 31 de enero 2027. Last Man Standing en Pérez Zeledón, Costa Rica.">
 
-    <meta property="og:title" content="PZ Backyard Ultra 2027 — 48 HORAS">
-    <meta property="og:description" content="Tercera edición. 48 horas. 200 millas. Last Man Standing en Pérez Zeledón.">
+    <meta property="og:title" content="PZ Backyard Ultra 2027 / 48 Horas">
+    <meta property="og:description" content="Tercera edición. 48 horas. 200 millas. Hotel Del Sur. Pérez Zeledón. La campana suena cada hora.">
     <meta property="og:image" content="https://pzbackyard.com/images/1.jpg">
     <meta property="og:url" content="https://pzbackyard.com/">
     <meta property="og:type" content="website">
@@ -18,17 +18,46 @@
     <link rel="icon" type="image/jpeg" href="images/1.jpg">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e2e8f0; scroll-behavior: smooth; }
-        h1, h2, h3, .brand-font { font-family: 'Teko', sans-serif; text-transform: uppercase; }
+        :root {
+            --bg: #050505;
+            --ink: #f5f5f4;
+            --dim: #a1a1aa;
+            --rule: #1c1917;
+            --yellow: #facc15;
+            --blood: #dc2626;
+        }
+        html, body { background-color: var(--bg); }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, .brand-font { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
 
-        .carousel-container { overflow: hidden; position: relative; width: 100%; height: 50vh; background: #000; border-top: 1px solid #333; border-bottom: 1px solid #333; }
-        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; }
-        .carousel-slide { min-width: 100%; height: 100%; background-size: cover; background-position: center; position: relative; }
-        .carousel-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); }
+        /* Film grain overlay for the whole page. */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+            opacity: 0.06;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1   0 0 0 0 1   0 0 0 0 1   0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+        }
 
+        /* Carousel */
+        .carousel-container { overflow: hidden; position: relative; width: 100%; height: 62vh; background: #000; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+        .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); height: 100%; }
+        .carousel-slide { min-width: 100%; height: 100%; background-size: cover; background-position: center; position: relative; filter: contrast(1.06) saturate(0.9); }
+        .carousel-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 75%); }
+
+        /* Glitch H1 */
         .glitch { position: relative; }
         .glitch::before, .glitch::after {
             content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
@@ -43,16 +72,137 @@
             80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
         }
+
+        /* Marquee ticker */
+        .ticker {
+            background: var(--yellow);
+            color: #000;
+            border-top: 4px solid #000;
+            border-bottom: 4px solid #000;
+            overflow: hidden;
+            position: relative;
+        }
+        .ticker-track {
+            display: flex;
+            white-space: nowrap;
+            animation: tick 38s linear infinite;
+            will-change: transform;
+        }
+        .ticker-group {
+            display: flex;
+            flex-shrink: 0;
+            padding: 14px 0;
+        }
+        .ticker-group span {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0 1.5rem;
+            line-height: 1;
+        }
+        .ticker-group span::after {
+            content: '✕';
+            color: #000;
+            margin-left: 1.5rem;
+            opacity: 0.6;
+        }
+        @keyframes tick {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Race-bib stripe divider */
+        .bib-stripe {
+            height: 18px;
+            background-image: repeating-linear-gradient(135deg, var(--yellow) 0 22px, #000 22px 44px);
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        /* Race-bib edition tag */
+        .race-bib {
+            border: 2px solid var(--yellow);
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            padding: 6px 14px 8px;
+            line-height: 1;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            transform: rotate(-3deg);
+        }
+        .race-bib .label { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.25em; color: var(--yellow); }
+        .race-bib .num { font-family: 'Teko', sans-serif; font-size: 2.6rem; font-weight: 700; color: #fff; line-height: 0.85; margin-top: 2px; }
+
+        /* Vertical timeline (LAS HORAS) */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+            border-left: 2px solid var(--rule);
+        }
+        .timeline-node {
+            position: relative;
+            padding: 22px 0;
+        }
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 32px;
+            width: 14px;
+            height: 14px;
+            background: var(--yellow);
+            border: 2px solid #000;
+            box-shadow: 0 0 0 3px var(--bg);
+            border-radius: 0;
+            transform: rotate(45deg);
+        }
+        .timeline-node.peak::before {
+            background: var(--blood);
+        }
+
+        /* Section labels (data badges) */
+        .kicker {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            color: var(--yellow);
+            text-transform: uppercase;
+            border: 1px solid var(--yellow);
+            padding: 4px 10px;
+            margin-bottom: 16px;
+        }
+
+        /* Slash divider */
+        .slash {
+            color: var(--yellow);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            padding: 0 0.5rem;
+            opacity: 0.8;
+        }
+
         .hidden { display: none; }
+
+        /* Hero background image with stronger duotone-ish treatment */
+        .hero-bg {
+            background-image: url('images/1.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(0.3) contrast(1.1) brightness(0.55);
+        }
     </style>
 </head>
 <body class="antialiased relative">
 
     <a href="https://wa.me/50689521104?text=Hola%20Javier,%20quiero%20inscribirme%20al%20PZ%20Backyard%20Ultra%202027"
        target="_blank"
-       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.6)] hover:scale-110 transition-transform duration-300 flex items-center justify-center group animate-pulse hover:animate-none">
+       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.6)] hover:scale-110 transition-transform duration-300 flex items-center justify-center group">
         <span class="absolute right-full mr-4 bg-white text-black px-3 py-1 rounded text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            Chat con Javier
+            Javier / WhatsApp
         </span>
         <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
@@ -63,343 +213,460 @@
         <button onclick="setLang('en')" id="btn-en" class="text-gray-500 hover:text-white transition tracking-widest text-sm">EN</button>
     </div>
 
+    <!-- HERO -->
     <header class="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
-        <div class="absolute inset-0 bg-black/65 z-10"></div>
-        <div class="absolute inset-0 bg-[url('images/1.jpg')] bg-cover bg-center opacity-70 z-0"></div>
+        <div class="absolute inset-0 z-0 hero-bg"></div>
+        <div class="absolute inset-0 bg-black/55 z-10"></div>
+        <div class="absolute inset-0 z-10" style="background: radial-gradient(circle at 50% 80%, transparent 0%, rgba(0,0,0,0.7) 70%);"></div>
+
+        <div class="absolute top-24 left-4 md:left-10 z-20 race-bib">
+            <span class="label">EDICIÓN</span>
+            <span class="num">03</span>
+        </div>
 
         <div class="relative z-20 text-center px-4 max-w-6xl mx-auto">
-            <div class="inline-block bg-yellow-600 text-black px-4 py-1 font-bold tracking-widest text-sm mb-6 uppercase transform -skew-x-12">
-                <span class="lang-es block skew-x-12">Tercera Edición · 48 Horas</span>
-                <span class="lang-en hidden block skew-x-12">Third Edition · 48 Hours</span>
+            <div class="inline-block bg-yellow-500 text-black px-5 py-1 font-bold tracking-[0.25em] text-xs mb-6 uppercase mono">
+                <span class="lang-es">48 Horas / 322 km / 200 millas</span>
+                <span class="lang-en hidden">48 Hours / 322 km / 200 miles</span>
             </div>
 
-            <h1 class="text-7xl md:text-[9rem] font-bold tracking-tighter text-white mb-2 glitch leading-[0.85]" data-text="PZ BACKYARD">
+            <h1 class="text-[5rem] md:text-[10rem] font-bold tracking-tighter text-white mb-1 glitch leading-[0.82]" data-text="PZ BACKYARD">
                 PZ BACKYARD
             </h1>
-            <h2 class="text-5xl md:text-8xl font-bold tracking-tighter text-gray-300 mb-8 brand-font">ULTRA</h2>
+            <h2 class="text-5xl md:text-8xl font-bold tracking-tighter text-yellow-500 mb-10 brand-font">ULTRA / 2027</h2>
 
-            <div class="flex flex-col md:flex-row justify-center items-center gap-3 md:gap-4 text-xl md:text-2xl text-white font-light tracking-wide mb-3 brand-font">
-                <span>29 — 31 ENERO 2027</span>
-                <span class="hidden md:inline text-yellow-500">•</span>
-                <span class="lang-es">VIE 6:00 PM</span>
-                <span class="lang-en hidden">FRI 6:00 PM</span>
-                <span class="hidden md:inline text-yellow-500">•</span>
+            <div class="flex flex-col md:flex-row justify-center items-center text-xl md:text-3xl text-white font-light tracking-wide mb-2 brand-font">
+                <span>29 AL 31 DE ENERO</span>
+                <span class="slash hidden md:inline">/</span>
+                <span class="lang-es">VIE 18:00</span>
+                <span class="lang-en hidden">FRI 18:00</span>
+                <span class="slash hidden md:inline">/</span>
                 <span>HOTEL DEL SUR</span>
             </div>
-            <p class="text-gray-400 font-light text-sm md:text-base tracking-widest uppercase mb-10">
-                Pérez Zeledón · Costa Rica
+            <p class="mono text-gray-400 text-xs md:text-sm tracking-[0.3em] uppercase mb-10">
+                Pérez Zeledón / Costa Rica
             </p>
 
-            <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
-                <div class="bg-black/80 border border-gray-700 p-4 min-w-[80px] md:min-w-[100px]">
-                    <span id="d" class="block text-4xl md:text-6xl text-yellow-500 font-bold brand-font leading-none">00</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-widest lang-es">Días</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-widest lang-en hidden">Days</span>
+            <div id="countdown" class="flex flex-wrap justify-center gap-3 md:gap-6 mb-12">
+                <div class="bg-black/80 border border-yellow-600/30 p-4 min-w-[80px] md:min-w-[110px]">
+                    <span id="d" class="block text-4xl md:text-7xl text-yellow-500 font-bold brand-font leading-none">00</span>
+                    <span class="text-xs text-gray-500 mono uppercase tracking-widest lang-es">Días</span>
+                    <span class="text-xs text-gray-500 mono uppercase tracking-widest lang-en hidden">Days</span>
                 </div>
-                <div class="bg-black/80 border border-gray-700 p-4 min-w-[80px] md:min-w-[100px]">
-                    <span id="h" class="block text-4xl md:text-6xl text-yellow-500 font-bold brand-font leading-none">00</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-widest lang-es">Horas</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-widest lang-en hidden">Hours</span>
+                <div class="bg-black/80 border border-yellow-600/30 p-4 min-w-[80px] md:min-w-[110px]">
+                    <span id="h" class="block text-4xl md:text-7xl text-yellow-500 font-bold brand-font leading-none">00</span>
+                    <span class="text-xs text-gray-500 mono uppercase tracking-widest lang-es">Horas</span>
+                    <span class="text-xs text-gray-500 mono uppercase tracking-widest lang-en hidden">Hours</span>
                 </div>
-                <div class="bg-black/80 border border-gray-700 p-4 min-w-[80px] md:min-w-[100px]">
-                    <span id="m" class="block text-4xl md:text-6xl text-yellow-500 font-bold brand-font leading-none">00</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-widest lang-es">Mins</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-widest lang-en hidden">Mins</span>
+                <div class="bg-black/80 border border-yellow-600/30 p-4 min-w-[80px] md:min-w-[110px]">
+                    <span id="m" class="block text-4xl md:text-7xl text-yellow-500 font-bold brand-font leading-none">00</span>
+                    <span class="text-xs text-gray-500 mono uppercase tracking-widest lang-es">Mins</span>
+                    <span class="text-xs text-gray-500 mono uppercase tracking-widest lang-en hidden">Mins</span>
                 </div>
-                <div class="bg-black/80 border border-gray-700 p-4 min-w-[80px] md:min-w-[100px]">
-                    <span id="s" class="block text-4xl md:text-6xl text-white font-bold brand-font leading-none animate-pulse">00</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-widest lang-es">Segs</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-widest lang-en hidden">Secs</span>
+                <div class="bg-black/80 border border-yellow-600/30 p-4 min-w-[80px] md:min-w-[110px]">
+                    <span id="s" class="block text-4xl md:text-7xl text-white font-bold brand-font leading-none animate-pulse">00</span>
+                    <span class="text-xs text-gray-500 mono uppercase tracking-widest lang-es">Segs</span>
+                    <span class="text-xs text-gray-500 mono uppercase tracking-widest lang-en hidden">Secs</span>
                 </div>
             </div>
+
+            <p class="text-gray-200 text-base md:text-xl mb-10 max-w-2xl mx-auto leading-snug">
+                <span class="lang-es">Una vuelta de <strong class="text-white">6.706 km</strong> cada hora. La última persona que cruce la línea dentro del tiempo gana. El resto es DNF.</span>
+                <span class="lang-en hidden">A <strong class="text-white">6.706 km</strong> loop every hour. The last person to cross the line within the cutoff wins. Everyone else gets a DNF.</span>
+            </p>
 
             <a href="#register" class="bg-yellow-500 hover:bg-white text-black font-bold py-4 px-12 text-2xl brand-font transition-all duration-300 hover:shadow-[0_0_30px_rgba(234,179,8,0.6)] skew-x-[-10deg] inline-block">
                 <span class="block skew-x-[10deg] lang-es">TOMAR UN CUPO</span>
                 <span class="block skew-x-[10deg] lang-en hidden">GRAB A SPOT</span>
             </a>
-            <p class="mt-6 text-yellow-500 font-bold font-mono text-sm md:text-lg tracking-widest uppercase">
-                <span class="lang-es">⚡ Nuevo Formato · 48 Horas · Inscripciones Abiertas</span>
-                <span class="lang-en hidden">⚡ New Format · 48 Hours · Registration Open</span>
+            <p class="mt-6 text-gray-400 mono text-xs md:text-sm tracking-[0.3em] uppercase">
+                <span class="lang-es">Inscripciones abiertas / WhatsApp directo a Javier</span>
+                <span class="lang-en hidden">Registration open / Direct WhatsApp to Javier</span>
             </p>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-gray-500 mono text-xs tracking-[0.4em] uppercase">
+            <span class="lang-es">▼ Scroll</span>
+            <span class="lang-en hidden">▼ Scroll</span>
         </div>
     </header>
 
-    <section class="py-20 px-6 bg-[#0a0a0a] text-center border-b border-gray-900">
-        <div class="max-w-4xl mx-auto">
-            <span class="text-yellow-600 font-mono text-sm tracking-widest mb-4 block">THE LEGACY</span>
-            <h2 class="text-5xl md:text-6xl text-white mb-8 brand-font">
-                <span class="lang-es">EL ORIGEN DEL CAOS</span>
-                <span class="lang-en hidden">THE ORIGIN OF CHAOS</span>
-            </h2>
-            <div class="space-y-6 text-lg text-gray-400 leading-relaxed font-light text-left">
-                <p>
-                    <span class="lang-es">
-                        Inspirado por el legendario <strong>Lazarus Lake</strong> en Tennessee, el formato Backyard es psicológicamente devastador.
-                        La distancia es de <strong>6.706 km</strong>. Una vuelta cada hora. Sin descanso real. Sin excusas.
-                    </span>
-                    <span class="lang-en hidden">
-                        Inspired by the legendary <strong>Lazarus Lake</strong> in Tennessee, the Backyard format is psychologically devastating.
-                        The distance is <strong>6.706 km</strong>. One loop every hour. No real rest. No excuses.
-                    </span>
-                </p>
-                <p class="text-white font-medium">
-                    <span class="lang-es">
-                        Regresamos para la <strong>Tercera Edición</strong> en el Hotel Del Sur — y esta vez,
-                        <strong>duplicamos la apuesta</strong>. <strong>48 horas. 200 millas si llegas al final.</strong>
-                        Dos atardeceres. Dos noches. Una sola regla: estar en la línea de salida cuando suene la campana.
-                        <strong>Cada hora.</strong>
-                    </span>
-                    <span class="lang-en hidden">
-                        We return for the <strong>Third Edition</strong> at Hotel Del Sur — and this time,
-                        <strong>we double the bet</strong>. <strong>48 hours. 200 miles if you make it to the end.</strong>
-                        Two sunsets. Two nights. One rule: be on the starting line when the bell rings.
-                        <strong>Every. Single. Hour.</strong>
-                    </span>
-                </p>
+    <!-- TICKER -->
+    <div class="ticker">
+        <div class="ticker-track">
+            <div class="ticker-group">
+                <span>48 Horas</span><span>322 km</span><span>200 millas</span><span>6.706 km por vuelta</span><span>Una hora por vuelta</span><span>6 PM Viernes</span><span>Hotel Del Sur</span><span>Pérez Zeledón</span><span>Costa Rica</span><span>La campana no espera</span>
             </div>
+            <div class="ticker-group" aria-hidden="true">
+                <span>48 Horas</span><span>322 km</span><span>200 millas</span><span>6.706 km por vuelta</span><span>Una hora por vuelta</span><span>6 PM Viernes</span><span>Hotel Del Sur</span><span>Pérez Zeledón</span><span>Costa Rica</span><span>La campana no espera</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- EL FORMATO -->
+    <section class="py-24 px-6 bg-[#0a0a0a] border-b border-[#1c1917]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14">
+                <span class="kicker">The Format</span>
+                <h2 class="text-5xl md:text-7xl text-white brand-font">
+                    <span class="lang-es">EL FORMATO</span>
+                    <span class="lang-en hidden">THE FORMAT</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#1c1917]">
+                <div class="p-10 border-b md:border-b-0 md:border-r border-[#1c1917]">
+                    <div class="mono text-yellow-500 text-xs tracking-[0.3em] mb-4">01 / VUELTA</div>
+                    <h3 class="text-3xl text-white brand-font mb-3">6.706 km</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">
+                        <span class="lang-es">Una vuelta. La terminas en menos de una hora o el evento sigue sin vos.</span>
+                        <span class="lang-en hidden">One loop. Finish under the hour or the event moves on without you.</span>
+                    </p>
+                </div>
+                <div class="p-10 border-b md:border-b-0 md:border-r border-[#1c1917]">
+                    <div class="mono text-yellow-500 text-xs tracking-[0.3em] mb-4">02 / CAMPANA</div>
+                    <h3 class="text-3xl text-white brand-font mb-3">CADA HORA EN PUNTO</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">
+                        <span class="lang-es">Todos dentro del corral cuando suena la campana. Llegás tarde, estás afuera.</span>
+                        <span class="lang-en hidden">Everyone in the corral when the bell rings. Late means out.</span>
+                    </p>
+                </div>
+                <div class="p-10">
+                    <div class="mono text-yellow-500 text-xs tracking-[0.3em] mb-4">03 / GANADOR</div>
+                    <h3 class="text-3xl text-white brand-font mb-3">EL ÚLTIMO DE PIE</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">
+                        <span class="lang-es">El evento sigue hasta 48 horas o hasta que solo quede una persona corriendo. Esa persona gana. El resto es DNF.</span>
+                        <span class="lang-en hidden">The event runs 48 hours or until only one person is still running. That person wins. Everyone else gets a DNF.</span>
+                    </p>
+                </div>
+            </div>
+
+            <p class="text-center text-gray-500 mono text-xs tracking-[0.3em] uppercase mt-10">
+                <span class="lang-es">El formato original de Lazarus Lake. Importado a Pérez Zeledón. Sin diluir.</span>
+                <span class="lang-en hidden">Lazarus Lake's original format. Imported to Pérez Zeledón. Undiluted.</span>
+            </p>
         </div>
     </section>
 
-    <section class="py-20 px-6 bg-black border-b border-gray-900">
+    <div class="bib-stripe"></div>
+
+    <!-- DE 24 A 48 -->
+    <section class="py-24 px-6 bg-black">
         <div class="max-w-6xl mx-auto">
-            <span class="text-yellow-600 font-mono text-sm tracking-widest mb-4 block text-center">THE PROGRESSION</span>
-            <h2 class="text-5xl md:text-6xl text-white mb-12 brand-font text-center">
-                <span class="lang-es">SE DUPLICA EL SUFRIMIENTO</span>
-                <span class="lang-en hidden">THE SUFFERING DOUBLES</span>
-            </h2>
+            <div class="text-center mb-14">
+                <span class="kicker">2026 → 2027</span>
+                <h2 class="text-5xl md:text-7xl text-white brand-font">
+                    <span class="lang-es">DE 24 A 48</span>
+                    <span class="lang-en hidden">FROM 24 TO 48</span>
+                </h2>
+                <p class="text-gray-500 mono text-xs md:text-sm tracking-[0.25em] uppercase mt-5 max-w-2xl mx-auto">
+                    <span class="lang-es">El año pasado ni siquiera amaneció el segundo día. Este año arrancamos al atardecer.</span>
+                    <span class="lang-en hidden">Last year didn't even reach the second day's sunrise. This year we start at sunset.</span>
+                </p>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="border border-gray-800 bg-gray-900/40 p-8 text-center">
-                    <div class="text-gray-500 font-mono text-xs tracking-[0.2em] uppercase mb-3">2026 · Segunda Edición</div>
-                    <div class="text-yellow-500 text-6xl brand-font font-bold mb-2">24<span class="text-3xl">h</span></div>
-                    <div class="text-white font-bold mb-1">100 <span class="lang-es">MILLAS</span><span class="lang-en hidden">MILES</span></div>
-                    <p class="text-gray-500 text-sm font-light mt-3">
-                        <span class="lang-es">El año pasado, ni siquiera rodaron las 24 horas completas. El backyard no perdona.</span>
-                        <span class="lang-en hidden">Last year, it didn't even run the full 24 hours. The backyard does not forgive.</span>
+                <div class="border border-[#1c1917] bg-[#0a0a0a] p-8 text-center opacity-60">
+                    <div class="mono text-gray-500 text-xs tracking-[0.3em] mb-4">2026 / 02</div>
+                    <div class="text-yellow-700 text-7xl brand-font font-bold mb-1 line-through decoration-2">24<span class="text-3xl">h</span></div>
+                    <div class="text-gray-400 font-bold mb-3 brand-font text-2xl">100 <span class="lang-es">MILLAS</span><span class="lang-en hidden">MILES</span></div>
+                    <p class="text-gray-500 text-sm font-light leading-snug">
+                        <span class="lang-es">Nadie llegó a las 24 horas. Hubo ganador antes del amanecer.</span>
+                        <span class="lang-en hidden">Nobody made it to 24 hours. We had a winner before sunrise.</span>
                     </p>
                 </div>
-                <div class="border-2 border-yellow-600 bg-yellow-900/10 p-8 text-center transform md:scale-105 shadow-[0_0_50px_rgba(234,179,8,0.15)]">
-                    <div class="text-yellow-500 font-mono text-xs tracking-[0.2em] uppercase mb-3">2027 · Tercera Edición</div>
-                    <div class="text-white text-6xl brand-font font-bold mb-2">48<span class="text-3xl">h</span></div>
-                    <div class="text-yellow-500 font-bold mb-1">200 <span class="lang-es">MILLAS</span><span class="lang-en hidden">MILES</span></div>
-                    <p class="text-gray-300 text-sm font-light mt-3">
-                        <span class="lang-es">Doble la distancia. Dos noches. Una sola regla.</span>
-                        <span class="lang-en hidden">Twice the distance. Two nights. One rule.</span>
-                    </p>
-                </div>
-                <div class="border border-gray-800 bg-gray-900/40 p-8 text-center">
-                    <div class="text-gray-500 font-mono text-xs tracking-[0.2em] uppercase mb-3">2028 →</div>
-                    <div class="text-gray-600 text-6xl brand-font font-bold mb-2">∞</div>
-                    <div class="text-gray-400 font-bold mb-1">
-                        <span class="lang-es">EL FUTURO</span>
-                        <span class="lang-en hidden">THE FUTURE</span>
+
+                <div class="border-2 border-yellow-500 bg-gradient-to-b from-yellow-900/15 to-black p-8 text-center shadow-[0_0_60px_rgba(234,179,8,0.18)] md:scale-105 relative">
+                    <div class="absolute top-0 left-0 right-0 bg-yellow-500 text-black mono text-xs tracking-[0.3em] py-1">2027 / 03 / TERCERA EDICIÓN</div>
+                    <div class="pt-6">
+                        <div class="text-white text-7xl brand-font font-bold mb-1">48<span class="text-3xl">h</span></div>
+                        <div class="text-yellow-500 font-bold mb-3 brand-font text-2xl">200 <span class="lang-es">MILLAS</span><span class="lang-en hidden">MILES</span></div>
+                        <p class="text-gray-300 text-sm font-light leading-snug">
+                            <span class="lang-es">El doble de tiempo que el año pasado. La campana suena igual.</span>
+                            <span class="lang-en hidden">Twice as long as last year. The bell rings the same.</span>
+                        </p>
                     </div>
-                    <p class="text-gray-500 text-sm font-light mt-3">
-                        <span class="lang-es">El backyard solo termina cuando alguien gane.</span>
-                        <span class="lang-en hidden">The backyard only ends when someone wins.</span>
+                </div>
+
+                <div class="border border-[#1c1917] bg-[#0a0a0a] p-8 text-center opacity-60">
+                    <div class="mono text-gray-500 text-xs tracking-[0.3em] mb-4">2028 / TBD</div>
+                    <div class="text-gray-700 text-7xl brand-font font-bold mb-1">??<span class="text-3xl">h</span></div>
+                    <div class="text-gray-500 font-bold mb-3 brand-font text-2xl">
+                        <span class="lang-es">POR DEFINIR</span>
+                        <span class="lang-en hidden">TBD</span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-light leading-snug">
+                        <span class="lang-es">Si alguien gana este año, hay que subirle el techo el próximo.</span>
+                        <span class="lang-en hidden">If somebody wins this year, we raise the ceiling next year.</span>
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="register" class="py-24 px-6 bg-gradient-to-b from-slate-900 to-black">
+    <!-- INSCRIPCIÓN -->
+    <section id="register" class="py-24 px-6 bg-gradient-to-b from-[#0a0a0a] to-black border-t border-[#1c1917]">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-center text-5xl text-white mb-4 brand-font">
-                <span class="lang-es">EL EVENTO PRINCIPAL</span>
-                <span class="lang-en hidden">THE MAIN EVENT</span>
-            </h2>
-            <p class="text-center text-gray-500 mb-12 uppercase tracking-widest">
-                <span class="lang-es">Una categoría. Un ganador. 48 Horas.</span>
-                <span class="lang-en hidden">One Category. One Winner. 48 Hours.</span>
-            </p>
+            <div class="text-center mb-12">
+                <span class="kicker">Registration</span>
+                <h2 class="text-5xl md:text-7xl text-white brand-font">
+                    <span class="lang-es">INSCRIPCIÓN</span>
+                    <span class="lang-en hidden">REGISTRATION</span>
+                </h2>
+            </div>
 
-            <div class="relative bg-black border-2 border-yellow-600 p-8 md:p-12 shadow-[0_0_50px_rgba(234,179,8,0.2)]">
-                <div class="absolute top-0 right-0 bg-yellow-600 text-black text-sm font-bold px-4 py-2 uppercase tracking-widest">
-                    <span class="lang-es">Inscripciones Abiertas</span><span class="lang-en hidden">Registration Open</span>
+            <div class="relative bg-black border-2 border-yellow-500 p-8 md:p-12 shadow-[0_0_80px_rgba(234,179,8,0.18)]">
+                <div class="absolute -top-4 left-6 bg-yellow-500 text-black mono text-xs font-bold px-3 py-1 tracking-[0.3em]">
+                    <span class="lang-es">CUPOS LIMITADOS</span><span class="lang-en hidden">LIMITED SPOTS</span>
                 </div>
 
                 <div class="text-center mb-10">
-                    <h3 class="text-5xl md:text-6xl text-white mb-2 brand-font">COMPETITIVO</h3>
-                    <p class="text-yellow-500 font-mono text-sm uppercase tracking-[0.2em]">Last Man Standing Format</p>
+                    <h3 class="text-5xl md:text-6xl text-white brand-font">COMPETITIVO</h3>
+                    <p class="text-gray-500 mono text-xs uppercase tracking-[0.3em] mt-2">Last Man Standing / 48h</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-gray-300">
                     <ul class="space-y-4 text-sm md:text-base">
-                        <li class="flex items-start"><span class="text-yellow-500 mr-3">➤</span> <span class="lang-es">Salida: <strong>Viernes 29 Ene · 6:00 PM</strong></span><span class="lang-en hidden">Start: <strong>Fri Jan 29 · 6:00 PM</strong></span></li>
-                        <li class="flex items-start"><span class="text-yellow-500 mr-3">➤</span> <span class="lang-es">Formato: 6.706 km <strong>CADA HORA</strong></span><span class="lang-en hidden">Format: 6.706 km <strong>EVERY HOUR</strong></span></li>
-                        <li class="flex items-start"><span class="text-yellow-500 mr-3">➤</span> <span class="lang-es"><strong>48 Horas</strong> de Resistencia</span><span class="lang-en hidden"><strong>48 Hours</strong> of Endurance</span></li>
-                        <li class="flex items-start"><span class="text-yellow-500 mr-3">➤</span> <span class="lang-es">Cierre: <strong>Domingo 31 Ene · 6:00 PM</strong></span><span class="lang-en hidden">Cutoff: <strong>Sun Jan 31 · 6:00 PM</strong></span></li>
+                        <li class="flex items-start"><span class="text-yellow-500 mr-3 mono">/</span> <span class="lang-es">Salida: <strong class="text-white">Viernes 29 Ene / 18:00</strong></span><span class="lang-en hidden">Start: <strong class="text-white">Fri Jan 29 / 18:00</strong></span></li>
+                        <li class="flex items-start"><span class="text-yellow-500 mr-3 mono">/</span> <span class="lang-es">Formato: 6.706 km <strong class="text-white">cada hora</strong></span><span class="lang-en hidden">Format: 6.706 km <strong class="text-white">every hour</strong></span></li>
+                        <li class="flex items-start"><span class="text-yellow-500 mr-3 mono">/</span> <span class="lang-es"><strong class="text-white">48 horas</strong> de carrera</span><span class="lang-en hidden"><strong class="text-white">48 hours</strong> of racing</span></li>
+                        <li class="flex items-start"><span class="text-yellow-500 mr-3 mono">/</span> <span class="lang-es">Cierre: <strong class="text-white">Domingo 31 Ene / 18:00</strong></span><span class="lang-en hidden">Cutoff: <strong class="text-white">Sun Jan 31 / 18:00</strong></span></li>
+                        <li class="flex items-start"><span class="text-yellow-500 mr-3 mono">/</span> <span class="lang-es">Hotel Del Sur, Pérez Zeledón</span><span class="lang-en hidden">Hotel Del Sur, Pérez Zeledón</span></li>
                     </ul>
-                    <div class="border border-gray-800 bg-gray-900/50 p-4 text-center flex flex-col justify-center">
-                        <span class="text-gray-500 text-xs uppercase tracking-widest mb-1">Inscripción / Entry</span>
+                    <div class="border border-[#1c1917] bg-[#0a0a0a] p-5 text-center flex flex-col justify-center">
+                        <span class="text-gray-500 mono text-xs uppercase tracking-[0.3em] mb-2">Inscripción</span>
                         <span class="text-4xl text-white font-bold brand-font">₡60.000</span>
-                        <span class="text-gray-600 text-xs mt-1 font-mono">~ $115 USD</span>
+                        <span class="text-gray-500 text-xs mt-1 mono">≈ $115 USD</span>
                     </div>
                 </div>
 
-                <a href="https://wa.me/50689521104?text=Hola%20Javier,%20quiero%20inscribirme%20al%20PZ%20Backyard%20Ultra%202027" class="block w-full text-center bg-yellow-600 hover:bg-white hover:text-black text-black py-5 font-bold transition uppercase text-xl brand-font shadow-lg">
-                    <span class="lang-es">Reclamar Cupo Ahora</span><span class="lang-en hidden">Claim Spot Now</span>
+                <a href="https://wa.me/50689521104?text=Hola%20Javier,%20quiero%20inscribirme%20al%20PZ%20Backyard%20Ultra%202027" class="block w-full text-center bg-yellow-500 hover:bg-white hover:text-black text-black py-5 font-bold transition uppercase text-xl brand-font shadow-lg">
+                    <span class="lang-es">Reservar Cupo / WhatsApp</span><span class="lang-en hidden">Reserve a Spot / WhatsApp</span>
                 </a>
-                <p class="text-center text-gray-500 text-xs mt-4 font-mono uppercase tracking-widest">
-                    <span class="lang-es">WhatsApp directo a Javier · Cupos limitados</span>
-                    <span class="lang-en hidden">Direct WhatsApp to Javier · Limited spots</span>
+                <p class="text-center text-gray-500 mono text-xs mt-4 tracking-[0.3em] uppercase">
+                    <span class="lang-es">Javier responde directo</span>
+                    <span class="lang-en hidden">Javier replies directly</span>
                 </p>
             </div>
         </div>
     </section>
 
-    <section class="bg-black">
+    <!-- CAROUSEL -->
+    <section class="bg-black relative">
+        <div class="absolute top-4 left-4 z-30 mono text-xs text-yellow-500 tracking-[0.3em] uppercase bg-black/70 px-2 py-1 border border-yellow-500/50">
+            <span class="lang-es">Archivo / 2026</span>
+            <span class="lang-en hidden">Archive / 2026</span>
+        </div>
         <div class="carousel-container">
             <div id="carouselTrack" class="carousel-track"></div>
         </div>
     </section>
 
-    <section class="py-16 px-6 bg-[#050505] border-t border-gray-900">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-            <div class="p-8 border border-gray-800 bg-gray-900/40">
-                <div class="text-yellow-500 text-3xl mb-2 font-bold brand-font">JUE 28 ENE</div>
-                <p class="text-white font-bold">MONTE GENERAL</p>
-                <p class="text-gray-500 text-xs uppercase tracking-widest mt-2">
-                    <span class="lang-es">Entrega de Paquetes<br>4:00 PM - 7:00 PM</span>
-                    <span class="lang-en hidden">Package Pickup<br>4:00 PM - 7:00 PM</span>
-                </p>
+    <!-- EL CALENDARIO -->
+    <section class="py-24 px-6 bg-[#050505] border-t border-[#1c1917]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14">
+                <span class="kicker">Calendar</span>
+                <h2 class="text-5xl md:text-7xl text-white brand-font">
+                    <span class="lang-es">EL CALENDARIO</span>
+                    <span class="lang-en hidden">THE CALENDAR</span>
+                </h2>
             </div>
-            <div class="p-8 border border-gray-800 bg-gray-900/40">
-                <div class="text-yellow-500 text-3xl mb-2 font-bold brand-font">HOTEL DEL SUR</div>
-                <p class="text-white font-bold">PÉREZ ZELEDÓN</p>
-                <p class="text-gray-500 text-xs uppercase tracking-widest mt-2"><span class="lang-es">La Sede</span><span class="lang-en hidden">The Venue</span></p>
-            </div>
-            <div class="p-8 border border-yellow-600 bg-yellow-900/10">
-                <div class="text-yellow-500 text-3xl mb-2 font-bold brand-font">VIE 29 · 6:00 PM</div>
-                <p class="text-white font-bold">
-                    <span class="lang-es">CAMPANAZO</span>
-                    <span class="lang-en hidden">FIRST BELL</span>
-                </p>
-                <p class="text-gray-500 text-xs uppercase tracking-widest mt-2"><span class="lang-es">Hora de Salida</span><span class="lang-en hidden">Start Time</span></p>
-            </div>
-            <div class="p-8 border border-gray-800 bg-gray-900/40">
-                <div class="text-yellow-500 text-3xl mb-2 font-bold brand-font">DOM 31 · 6:00 PM</div>
-                <p class="text-white font-bold">
-                    <span class="lang-es">CIERRE / 48H</span>
-                    <span class="lang-en hidden">CUTOFF / 48H</span>
-                </p>
-                <p class="text-gray-500 text-xs uppercase tracking-widest mt-2"><span class="lang-es">O hasta el Último de Pie</span><span class="lang-en hidden">Or until the Last Standing</span></p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#1c1917]">
+                <div class="p-8 border-b md:border-b-0 md:border-r border-[#1c1917]">
+                    <div class="mono text-gray-500 text-xs tracking-[0.3em] mb-3">JUE / 28 ENE</div>
+                    <div class="text-3xl text-yellow-500 brand-font font-bold mb-1">16:00 / 19:00</div>
+                    <p class="text-white font-bold tracking-wider mb-1">MONTE GENERAL</p>
+                    <p class="text-gray-400 text-sm">
+                        <span class="lang-es">Entrega de paquetes y kit del corredor</span>
+                        <span class="lang-en hidden">Bib pickup and runner kit</span>
+                    </p>
+                </div>
+                <div class="p-8 border-b md:border-b-0 md:border-r border-yellow-500 bg-yellow-900/10">
+                    <div class="mono text-yellow-500 text-xs tracking-[0.3em] mb-3">VIE / 29 ENE</div>
+                    <div class="text-3xl text-yellow-500 brand-font font-bold mb-1">18:00</div>
+                    <p class="text-white font-bold tracking-wider mb-1">HOTEL DEL SUR</p>
+                    <p class="text-gray-300 text-sm">
+                        <span class="lang-es">Primera campana. El reloj arranca y no para.</span>
+                        <span class="lang-en hidden">First bell. The clock starts and doesn't stop.</span>
+                    </p>
+                </div>
+                <div class="p-8">
+                    <div class="mono text-gray-500 text-xs tracking-[0.3em] mb-3">DOM / 31 ENE</div>
+                    <div class="text-3xl text-yellow-500 brand-font font-bold mb-1">18:00</div>
+                    <p class="text-white font-bold tracking-wider mb-1">
+                        <span class="lang-es">CIERRE / 48 H</span>
+                        <span class="lang-en hidden">CUTOFF / 48 H</span>
+                    </p>
+                    <p class="text-gray-400 text-sm">
+                        <span class="lang-es">O cuando solo quede una persona corriendo</span>
+                        <span class="lang-en hidden">Or when only one person is still running</span>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="py-20 px-6 bg-black border-t border-gray-900">
-        <div class="max-w-5xl mx-auto">
-            <span class="text-yellow-600 font-mono text-sm tracking-widest mb-4 block text-center">THE SPLITS</span>
-            <h2 class="text-4xl md:text-5xl text-white mb-12 brand-font text-center">
-                <span class="lang-es">LO QUE TE ESPERA</span>
-                <span class="lang-en hidden">WHAT AWAITS YOU</span>
-            </h2>
+    <!-- LAS HORAS (vertical timeline) -->
+    <section class="py-24 px-6 bg-black border-t border-[#1c1917]">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-14">
+                <span class="kicker">Splits</span>
+                <h2 class="text-5xl md:text-7xl text-white brand-font">
+                    <span class="lang-es">LAS HORAS</span>
+                    <span class="lang-en hidden">THE HOURS</span>
+                </h2>
+                <p class="text-gray-500 mono text-xs md:text-sm tracking-[0.25em] uppercase mt-5 max-w-2xl mx-auto">
+                    <span class="lang-es">Lo que vas a ver cuando lo veas. Suponiendo que sigas viendo.</span>
+                    <span class="lang-en hidden">What you'll see when you see it. Assuming you're still seeing.</span>
+                </p>
+            </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="border border-gray-800 bg-gray-900/40 p-5 text-center">
-                    <div class="text-yellow-500 font-mono text-xs tracking-widest uppercase mb-1">Hora 6</div>
-                    <div class="text-3xl text-white brand-font font-bold">40 km</div>
-                    <div class="text-gray-500 text-xs mt-1">25 mi · ~12 AM Sáb</div>
+            <div class="timeline">
+                <div class="timeline-node">
+                    <div class="flex items-baseline gap-4 mb-1">
+                        <span class="mono text-yellow-500 text-sm tracking-widest">H+01</span>
+                        <span class="text-gray-500 mono text-xs tracking-widest">19:00 VIE</span>
+                    </div>
+                    <div class="text-3xl text-white brand-font font-bold">6.7 km / 4.2 mi</div>
+                    <p class="text-gray-400 text-sm mt-1">
+                        <span class="lang-es">Primera vuelta. El sol ya bajó.</span>
+                        <span class="lang-en hidden">First loop. The sun is already down.</span>
+                    </p>
                 </div>
-                <div class="border border-gray-800 bg-gray-900/40 p-5 text-center">
-                    <div class="text-yellow-500 font-mono text-xs tracking-widest uppercase mb-1">Hora 12</div>
-                    <div class="text-3xl text-white brand-font font-bold">80 km</div>
-                    <div class="text-gray-500 text-xs mt-1">50 mi · ~6 AM Sáb</div>
+                <div class="timeline-node">
+                    <div class="flex items-baseline gap-4 mb-1">
+                        <span class="mono text-yellow-500 text-sm tracking-widest">H+06</span>
+                        <span class="text-gray-500 mono text-xs tracking-widest">00:00 SÁB</span>
+                    </div>
+                    <div class="text-3xl text-white brand-font font-bold">40 km / 25 mi</div>
+                    <p class="text-gray-400 text-sm mt-1">
+                        <span class="lang-es">Medianoche. Primera noche. Quedan 42 vueltas.</span>
+                        <span class="lang-en hidden">Midnight. First night. 42 loops left.</span>
+                    </p>
                 </div>
-                <div class="border border-gray-800 bg-gray-900/40 p-5 text-center">
-                    <div class="text-yellow-500 font-mono text-xs tracking-widest uppercase mb-1">Hora 24</div>
-                    <div class="text-3xl text-white brand-font font-bold">161 km</div>
-                    <div class="text-gray-500 text-xs mt-1">100 mi · ~6 PM Sáb</div>
+                <div class="timeline-node">
+                    <div class="flex items-baseline gap-4 mb-1">
+                        <span class="mono text-yellow-500 text-sm tracking-widest">H+12</span>
+                        <span class="text-gray-500 mono text-xs tracking-widest">06:00 SÁB</span>
+                    </div>
+                    <div class="text-3xl text-white brand-font font-bold">80 km / 50 mi</div>
+                    <p class="text-gray-400 text-sm mt-1">
+                        <span class="lang-es">Amanece. La mitad de los inscritos ya no está acá.</span>
+                        <span class="lang-en hidden">Sunrise. Half the starters are already gone.</span>
+                    </p>
                 </div>
-                <div class="border-2 border-yellow-600 bg-yellow-900/10 p-5 text-center">
-                    <div class="text-yellow-500 font-mono text-xs tracking-widest uppercase mb-1">Hora 48</div>
-                    <div class="text-3xl text-yellow-500 brand-font font-bold">322 km</div>
-                    <div class="text-gray-300 text-xs mt-1">200 mi · ~6 PM Dom</div>
+                <div class="timeline-node">
+                    <div class="flex items-baseline gap-4 mb-1">
+                        <span class="mono text-yellow-500 text-sm tracking-widest">H+24</span>
+                        <span class="text-gray-500 mono text-xs tracking-widest">18:00 SÁB</span>
+                    </div>
+                    <div class="text-3xl text-white brand-font font-bold">161 km / 100 mi</div>
+                    <p class="text-gray-400 text-sm mt-1">
+                        <span class="lang-es">100 millas. Y todavía falta la mitad del evento.</span>
+                        <span class="lang-en hidden">100 miles. And the event is only half over.</span>
+                    </p>
+                </div>
+                <div class="timeline-node">
+                    <div class="flex items-baseline gap-4 mb-1">
+                        <span class="mono text-yellow-500 text-sm tracking-widest">H+36</span>
+                        <span class="text-gray-500 mono text-xs tracking-widest">06:00 DOM</span>
+                    </div>
+                    <div class="text-3xl text-white brand-font font-bold">241 km / 150 mi</div>
+                    <p class="text-gray-400 text-sm mt-1">
+                        <span class="lang-es">Segunda noche en las piernas. Quedan los que quedan.</span>
+                        <span class="lang-en hidden">Second night in the legs. Whoever's left is left.</span>
+                    </p>
+                </div>
+                <div class="timeline-node peak">
+                    <div class="flex items-baseline gap-4 mb-1">
+                        <span class="mono text-red-500 text-sm tracking-widest">H+48</span>
+                        <span class="text-gray-500 mono text-xs tracking-widest">18:00 DOM</span>
+                    </div>
+                    <div class="text-4xl text-yellow-500 brand-font font-bold">322 km / 200 mi</div>
+                    <p class="text-gray-300 text-sm mt-1">
+                        <span class="lang-es">Cierre oficial. Si alguien sigue corriendo solo, esa persona ganó.</span>
+                        <span class="lang-en hidden">Official cutoff. If anyone is still running alone, that person won.</span>
+                    </p>
                 </div>
             </div>
-            <p class="text-center text-gray-500 text-xs uppercase tracking-widest mt-8 font-mono">
-                <span class="lang-es">Una vuelta · Una hora · 6.706 km · Repetir</span>
-                <span class="lang-en hidden">One loop · One hour · 6.706 km · Repeat</span>
+        </div>
+    </section>
+
+    <div class="bib-stripe"></div>
+
+    <!-- REGLAS -->
+    <section class="py-24 px-6 bg-[#050505]">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-14">
+                <span class="kicker">Rulebook</span>
+                <h2 class="text-5xl md:text-7xl text-white brand-font">
+                    <span class="lang-es">REGLAS</span>
+                    <span class="lang-en hidden">RULES</span>
+                </h2>
+            </div>
+
+            <div class="space-y-10 text-gray-400 font-light">
+                <div class="grid md:grid-cols-[80px_1fr] gap-4 md:gap-8 items-start">
+                    <div class="text-yellow-500 brand-font text-5xl font-bold leading-none">01</div>
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-2 uppercase tracking-wider"><span class="lang-es">El circuito</span><span class="lang-en hidden">The course</span></h3>
+                        <p class="lang-es leading-relaxed">6.706 metros. 4.167 millas. La completás en menos de una hora o el evento sigue sin vos.</p>
+                        <p class="lang-en hidden leading-relaxed">6.706 meters. 4.167 miles. Finish under the hour or the event moves on without you.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-[80px_1fr] gap-4 md:gap-8 items-start">
+                    <div class="text-yellow-500 brand-font text-5xl font-bold leading-none">02</div>
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-2 uppercase tracking-wider"><span class="lang-es">El corral</span><span class="lang-en hidden">The corral</span></h3>
+                        <p class="lang-es leading-relaxed">Todos dentro del corral cuando suena la campana. Cada hora en punto. Si no estás adentro, DNF.</p>
+                        <p class="lang-en hidden leading-relaxed">Everyone inside the corral when the bell rings. Every hour on the hour. Not inside means DNF.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-[80px_1fr] gap-4 md:gap-8 items-start">
+                    <div class="text-yellow-500 brand-font text-5xl font-bold leading-none">03</div>
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-2 uppercase tracking-wider"><span class="lang-es">La campana</span><span class="lang-en hidden">The bell</span></h3>
+                        <p class="lang-es leading-relaxed">Primera campana viernes 29 de enero a las 18:00. Silbatos a los 3, 2 y 1 minutos antes. Todos arrancan cuando suena la campana, no antes, no después.</p>
+                        <p class="lang-en hidden leading-relaxed">First bell Friday January 29 at 18:00. Whistle warnings at 3, 2 and 1 minutes before. Everyone starts when the bell rings, not before, not after.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-[80px_1fr] gap-4 md:gap-8 items-start">
+                    <div class="text-yellow-500 brand-font text-5xl font-bold leading-none">04</div>
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-2 uppercase tracking-wider"><span class="lang-es">Asistencia</span><span class="lang-en hidden">Assistance</span></h3>
+                        <p class="lang-es leading-relaxed">Cero ayuda en el circuito. Solo entre vueltas, después de cruzar la línea y antes de la próxima campana.</p>
+                        <p class="lang-en hidden leading-relaxed">Zero help on the course. Only between loops, after crossing the line and before the next bell.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-[80px_1fr] gap-4 md:gap-8 items-start">
+                    <div class="text-yellow-500 brand-font text-5xl font-bold leading-none">05</div>
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-2 uppercase tracking-wider"><span class="lang-es">El ganador</span><span class="lang-en hidden">The winner</span></h3>
+                        <p class="lang-es leading-relaxed">El evento sigue hasta 48 horas (cierre domingo 31 de enero a las 18:00) o hasta que solo quede una persona corriendo. Esa persona gana. Si nadie completa una vuelta en solitario dentro del tiempo, no hay ganador. Si alguien completa las 48 vueltas son exactamente 200 millas.</p>
+                        <p class="lang-en hidden leading-relaxed">The event runs 48 hours (cutoff Sunday January 31 at 18:00) or until only one person is still running. That person wins. If no one finishes a solo loop within the time, no winner. If anyone completes all 48 loops it is exactly 200 miles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bib-stripe"></div>
+
+    <footer class="bg-black text-gray-600 py-10 text-xs mono border-t border-[#1c1917]">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="tracking-[0.3em] uppercase text-gray-400">PZ Backyard Ultra / Pérez Zeledón / Costa Rica</p>
+            <p class="tracking-[0.3em] uppercase">
+                <a href="https://wa.me/50689521104" class="hover:text-yellow-500 transition">WhatsApp Javier</a>
+                <span class="text-gray-700 mx-3">/</span>
+                <span>© 2027</span>
             </p>
         </div>
-    </section>
-
-    <section class="py-20 px-6 bg-black">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl md:text-5xl text-white mb-10 brand-font text-center">
-                <span class="lang-es">REGLAMENTO OFICIAL</span>
-                <span class="lang-en hidden">OFFICIAL RULES</span>
-            </h2>
-
-            <div class="space-y-8 text-gray-400 font-light border-l-2 border-yellow-600 pl-8">
-                <div>
-                    <h3 class="text-xl text-white font-bold mb-2 uppercase">1. <span class="lang-es">El Circuito</span><span class="lang-en hidden">The Course</span></h3>
-                    <p class="lang-es">Distancia: 6.706 metros (4.167 millas). El circuito debe completarse en menos de una hora.</p>
-                    <p class="lang-en hidden">Distance: 6.706 meters (4.167 miles). The loop must be completed in less than one hour.</p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl text-white font-bold mb-2 uppercase">2. <span class="lang-es">El Corral de Salida</span><span class="lang-en hidden">The Starting Corral</span></h3>
-                    <p class="lang-es">
-                        Todos los corredores deben estar dentro del corral de salida cuando suene la campana (en punto de cada hora).
-                        No se permiten salidas tardías. Si no estás en la caja a la hora en punto: <strong>DNF</strong>.
-                    </p>
-                    <p class="lang-en hidden">
-                        All runners must be inside the starting corral when the bell rings (at the top of every hour).
-                        No late starts allowed. If you are not in the box at the top of the hour: <strong>DNF</strong>.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl text-white font-bold mb-2 uppercase">3. <span class="lang-es">La Campana</span><span class="lang-en hidden">The Bell</span></h3>
-                    <p class="lang-es">
-                        Primera campana <strong>Viernes 29 de Enero · 6:00 PM</strong>.
-                        Se darán avisos de silbato a los 3, 2 y 1 minutos antes de cada salida.
-                        Todos los competidores deben comenzar al sonar la campana.
-                    </p>
-                    <p class="lang-en hidden">
-                        First bell <strong>Friday January 29 · 6:00 PM</strong>.
-                        Whistle warnings will be given at 3, 2, and 1 minutes before the start.
-                        All competitors must start at the bell.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl text-white font-bold mb-2 uppercase">4. <span class="lang-es">Asistencia</span><span class="lang-en hidden">Assistance</span></h3>
-                    <p class="lang-es">
-                        No se permite asistencia en el circuito. Los corredores solo pueden recibir ayuda, comer y descansar
-                        <strong>entre vueltas</strong>, una vez que hayan terminado el circuito y antes de la siguiente campana.
-                    </p>
-                    <p class="lang-en hidden">
-                        No assistance allowed on the course. Runners can only receive aid, eat, and rest
-                        <strong>between loops</strong>, once they have finished the loop and before the next bell.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-xl text-white font-bold mb-2 uppercase">5. <span class="lang-es">El Ganador (Last Man Standing)</span><span class="lang-en hidden">The Winner (Last Man Standing)</span></h3>
-                    <p class="lang-es">
-                        El evento continúa hasta <strong>48 horas</strong> (cierre Domingo 31 de Enero · 6:00 PM) o hasta el último corredor de pie.
-                        El ganador es el último corredor que complete una vuelta en solitario dentro del tiempo límite.
-                        Todos los demás son técnicamente DNF (Did Not Finish). Si nadie completa una vuelta final en solitario, no hay ganador.
-                        Si alguien completa las 48 vueltas: <strong>200 millas exactas</strong>.
-                    </p>
-                    <p class="lang-en hidden">
-                        The event continues for up to <strong>48 hours</strong> (cutoff Sunday January 31 · 6:00 PM) or until the last runner standing.
-                        The winner is the last runner to complete a solo loop within the time limit.
-                        All others are technically DNF (Did Not Finish). If no one completes a final solo loop, there is no winner.
-                        If anyone completes all 48 loops: <strong>exactly 200 miles</strong>.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-black text-gray-700 text-center py-8 text-xs font-mono border-t border-gray-900">
-        <p class="mb-2 text-gray-500 tracking-widest uppercase">PZ Backyard Ultra · Pérez Zeledón · Costa Rica</p>
-        <p>&copy; 2027 PZ BACKYARD ULTRA · <a href="https://wa.me/50689521104" class="hover:text-yellow-500 transition">WhatsApp Javier</a></p>
     </footer>
 
     <script>
@@ -442,18 +709,17 @@
                 currentIndex = (currentIndex + 1) % slides.length;
                 track.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
-            setInterval(nextSlide, 3500);
+            setInterval(nextSlide, 4200);
         }
 
         // --- COUNTDOWN TIMER ---
-        // First bell: Friday January 29, 2027 at 6:00 PM Costa Rica time (UTC-6, no DST)
-        const raceDate = new Date('2027-01-30T00:00:00Z').getTime(); // 2027-01-29 18:00 CR (UTC-6)
+        // First bell: Friday January 29, 2027 at 18:00 Costa Rica time (UTC-6, no DST).
+        const raceDate = new Date('2027-01-30T00:00:00Z').getTime();
         setInterval(function() {
             const now = new Date().getTime();
             const distance = raceDate - now;
 
             if (distance <= 0) {
-                // Race has started — show 00s and stop
                 ['d','h','m','s'].forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.innerText = '00';
