@@ -1,0 +1,15 @@
+.git
+.gitignore
+.gitattributes
+.claude
+.wrangler
+.assetsignore
+node_modules
+originals
+intake
+reviews
+README.md
+wrangler.jsonc
+tailwind.config.js
+package.json
+package-lock.json

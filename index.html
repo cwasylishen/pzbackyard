@@ -5,19 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>PZ Backyard Ultra 2027 / 48 Horas / Last Man Standing</title>
-    <meta name="description" content="PZ Backyard Ultra 2027. Tercera edición. 48 horas. 200 millas. 29 al 31 de enero 2027. Last Man Standing en Pérez Zeledón, Costa Rica.">
+    <meta name="description" content="PZ Backyard Ultra 2027. Tercera edición. 48 horas. 200 millas. 29 al 31 de enero 2027. Last Man Standing en Pérez Zeledón, Costa Rica. / 48-hour backyard ultra. A 6.706 km loop every hour, last one standing wins. Jan 29 to 31, 2027, Hotel Del Sur, Pérez Zeledón, Costa Rica.">
+    <link rel="canonical" href="https://pzbackyard.com/">
 
     <meta property="og:title" content="PZ Backyard Ultra 2027 / 48 Horas">
     <meta property="og:description" content="Tercera edición. 48 horas. 200 millas. Hotel Del Sur. Pérez Zeledón. La campana suena cada hora.">
-    <meta property="og:image" content="https://pzbackyard.com/images/1.jpg">
+    <meta property="og:image" content="https://pzbackyard.com/images/og.jpg">
     <meta property="og:url" content="https://pzbackyard.com/">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_CR">
+    <meta property="og:locale:alternate" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#050505">
 
-    <link rel="icon" type="image/jpeg" href="images/1.jpg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsEvent",
+      "name": "PZ Backyard Ultra 2027",
+      "alternateName": "PZ Backyard Ultra / Tercera Edición",
+      "description": "48-hour backyard ultra (Last Man Standing). A 6.706 km loop every hour, up to 48 loops (322 km / 200 miles). The last runner to complete a solo loop within the hour wins.",
+      "sport": "Ultramarathon",
+      "startDate": "2027-01-29T18:00:00-06:00",
+      "endDate": "2027-01-31T18:00:00-06:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "inLanguage": ["es", "en"],
+      "image": "https://pzbackyard.com/images/og.jpg",
+      "url": "https://pzbackyard.com/",
+      "location": {
+        "@type": "Place",
+        "name": "Hotel Del Sur",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Pérez Zeledón",
+          "addressRegion": "San José",
+          "addressCountry": "CR"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "name": "Inscripción / Registration",
+        "price": "60000",
+        "priceCurrency": "CRC",
+        "availability": "https://schema.org/LimitedAvailability",
+        "url": "https://wa.me/50689521104?text=Hola%20Javier,%20quiero%20inscribirme%20al%20PZ%20Backyard%20Ultra%202027"
+      },
+      "organizer": {
+        "@type": "Person",
+        "name": "Javier",
+        "url": "https://wa.me/50689521104"
+      }
+    }
+    </script>
+
+    <link rel="stylesheet" href="/css/tailwind.css">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
@@ -185,11 +230,9 @@
             opacity: 0.8;
         }
 
-        .hidden { display: none; }
-
         /* Hero background image with stronger duotone-ish treatment */
         .hero-bg {
-            background-image: url('images/1.jpg');
+            background-image: url('images/1.webp');
             background-size: cover;
             background-position: center;
             filter: grayscale(0.3) contrast(1.1) brightness(0.55);
@@ -307,7 +350,7 @@
     <section class="py-24 px-6 bg-[#0a0a0a] border-b border-[#1c1917]">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-14">
-                <span class="kicker">The Format</span>
+                <span class="kicker"><span class="lang-es">Cómo se corre</span><span class="lang-en hidden">The Format</span></span>
                 <h2 class="text-5xl md:text-7xl text-white brand-font">
                     <span class="lang-es">EL FORMATO</span>
                     <span class="lang-en hidden">THE FORMAT</span>
@@ -408,7 +451,7 @@
     <section id="register" class="py-24 px-6 bg-gradient-to-b from-[#0a0a0a] to-black border-t border-[#1c1917]">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-12">
-                <span class="kicker">Registration</span>
+                <span class="kicker"><span class="lang-es">Tomá tu cupo</span><span class="lang-en hidden">Registration</span></span>
                 <h2 class="text-5xl md:text-7xl text-white brand-font">
                     <span class="lang-es">INSCRIPCIÓN</span>
                     <span class="lang-en hidden">REGISTRATION</span>
@@ -466,7 +509,7 @@
     <section class="py-24 px-6 bg-[#050505] border-t border-[#1c1917]">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-14">
-                <span class="kicker">Calendar</span>
+                <span class="kicker"><span class="lang-es">Agendalo</span><span class="lang-en hidden">Calendar</span></span>
                 <h2 class="text-5xl md:text-7xl text-white brand-font">
                     <span class="lang-es">EL CALENDARIO</span>
                     <span class="lang-en hidden">THE CALENDAR</span>
@@ -512,7 +555,7 @@
     <section class="py-24 px-6 bg-black border-t border-[#1c1917]">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-14">
-                <span class="kicker">Splits</span>
+                <span class="kicker"><span class="lang-es">Los parciales</span><span class="lang-en hidden">Splits</span></span>
                 <h2 class="text-5xl md:text-7xl text-white brand-font">
                     <span class="lang-es">LAS HORAS</span>
                     <span class="lang-en hidden">THE HOURS</span>
@@ -600,7 +643,7 @@
     <section class="py-24 px-6 bg-[#050505]">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-14">
-                <span class="kicker">Rulebook</span>
+                <span class="kicker"><span class="lang-es">El reglamento</span><span class="lang-en hidden">Rulebook</span></span>
                 <h2 class="text-5xl md:text-7xl text-white brand-font">
                     <span class="lang-es">REGLAS</span>
                     <span class="lang-en hidden">RULES</span>
@@ -677,47 +720,39 @@
     </footer>
 
     <script>
-        // --- IMAGE LOADER ---
-        const maxImagesToCheck = 40;
-        const imageFolder = 'images/';
+        // --- CAROUSEL (17 known images, lazy loaded) ---
+        const IMAGE_COUNT = 17;
         const track = document.getElementById('carouselTrack');
+        const slides = [];
 
-        async function loadImages() {
-            let foundImages = 0;
-            for (let i = 1; i <= maxImagesToCheck; i++) {
-                const imgPath = `${imageFolder}${i}.jpg`;
-                const exists = await checkImage(imgPath);
-                if(exists) {
-                    const slide = document.createElement('div');
-                    slide.className = 'carousel-slide flex-shrink-0';
-                    slide.style.backgroundImage = `url('${imgPath}')`;
-                    track.appendChild(slide);
-                    foundImages++;
-                }
-            }
-            if(foundImages > 0) startCarousel();
+        for (let i = 1; i <= IMAGE_COUNT; i++) {
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide flex-shrink-0';
+            slide.dataset.src = `images/${i}.webp`;
+            slide.setAttribute('role', 'img');
+            slide.setAttribute('aria-label', `PZ Backyard Ultra 2026, foto de archivo ${i} de ${IMAGE_COUNT}`);
+            track.appendChild(slide);
+            slides.push(slide);
         }
 
-        function checkImage(url) {
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = () => resolve(true);
-                img.onerror = () => resolve(false);
-                img.src = url;
-            });
+        function loadSlide(i) {
+            const slide = slides[i];
+            if (!slide || slide.dataset.loaded) return;
+            slide.dataset.loaded = '1';
+            slide.style.backgroundImage = `url('${slide.dataset.src}')`;
         }
 
-        // --- CAROUSEL LOGIC ---
         let currentIndex = 0;
-        function startCarousel() {
-            const slides = document.querySelectorAll('.carousel-slide');
-            if (slides.length === 0) return;
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % slides.length;
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-            setInterval(nextSlide, 4200);
+        loadSlide(0);
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            loadSlide(currentIndex);
+            loadSlide((currentIndex + 1) % slides.length);
         }
+        // Warm the second slide only after the page has settled.
+        window.addEventListener('load', () => setTimeout(() => loadSlide(1), 1500));
+        setInterval(nextSlide, 4200);
 
         // --- COUNTDOWN TIMER ---
         // First bell: Friday January 29, 2027 at 18:00 Costa Rica time (UTC-6, no DST).
@@ -754,6 +789,9 @@
             const btnEs = document.getElementById('btn-es');
             const btnEn = document.getElementById('btn-en');
 
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('pz-lang', lang); } catch (e) {}
+
             if (lang === 'es') {
                 esElements.forEach(el => el.classList.remove('hidden'));
                 enElements.forEach(el => el.classList.add('hidden'));
@@ -766,7 +804,12 @@
                 btnEs.classList.replace('text-yellow-500', 'text-gray-500');
             }
         }
-        loadImages();
+
+        // Restore saved language (default: es).
+        try {
+            const saved = localStorage.getItem('pz-lang');
+            if (saved === 'en') setLang('en');
+        } catch (e) {}
     </script>
 </body>
 </html>
